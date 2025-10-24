@@ -1,241 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eris - Sustainable Cycling</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family:Roboto+Slab:wght@300&family=Poppins:wght@300;600&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eris - Sustainable Cycling</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family:Roboto+Slab:wght@300&family=Poppins:wght@300;600&display=swap');
 
-    :root {
-      --green-light: #a8e6cf;
-      --green: #2ecc71;
-      --green-dark: #27ae60;
-      --gold: #f2b134;
-      --white: #ffffff;
-      --grey-light: #f9f9f9;
-      --grey-dark: #333;
-    }
+:root {
+  --green: #2ecc71;
+  --dark-green: #27ae60;
+  --gold: #f2b134;
+  --white: #ffffff;
+  --grey-light: #f9f9f9;
+  --grey-dark: #333;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--white);
-      color: var(--grey-dark);
-      margin: 0;
-      padding: 0;
-    }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--white);
+  margin: 0;
+  padding: 0;
+  color: var(--grey-dark);
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      background: var(--white);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      z-index: 1000;
-      padding: 15px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      animation: fadeInDown 1s ease forwards;
-    }
+header {
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 60px;
+  z-index: 999;
+  animation: fadeInDown 1s ease forwards;
+}
 
-    @keyframes fadeInDown {
-      from {opacity:0; transform: translateY(-20px);}
-      to {opacity:1; transform: translateY(0);}
-    }
+@keyframes fadeInDown {
+  from {opacity:0; transform: translateY(-20px);}
+  to {opacity:1; transform: translateY(0);}
+}
 
-    .logo {
-      font-family: 'Roboto Slab', serif;
-      font-weight: 300;
-      font-size: 28px;
-      color: var(--green-dark);
-      letter-spacing: 2px;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
+.logo {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  color: var(--green);
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.logo:hover {
+  color: var(--gold);
+}
 
-    .logo:hover {
-      color: var(--gold);
-    }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: var(--green);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+nav ul li a:hover {
+  color: var(--gold);
+}
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 40px;
-    }
+main {
+  max-width: 1200px;
+  margin: 60px auto 80px;
+  padding: 0 20px;
+  text-align: center;
+}
+.hero-title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 3.2rem;
+  letter-spacing: 4px;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+.hero-desc {
+  font-size: 1.2rem;
+  max-width: 720px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  color: #555;
+}
+.btn-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+button {
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1.2px;
+}
+.btn-green {
+  background: var(--green);
+  color: var(--white);
+  box-shadow: 0 8px 20px rgba(46, 204, 113, 0.15);
+}
+.btn-green:hover {
+  background: var(--dark-green);
+  box-shadow: 0 10px 24px rgba(39, 174, 96, 0.2);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+}
+.btn-outline:hover {
+  background: var(--gold);
+  color: white;
+  transform: scale(1.03);
+}
 
-    nav ul li {
-      cursor: pointer;
-      text-transform: uppercase;
-      font-weight: 600;
-      letter-spacing: 1.3px;
-      color: var(--green-dark);
-      transition: color 0.3s ease;
-      font-size: 14px;
-    }
+.bike-container {
+  margin: 50px auto;
+  max-width: 200px;
+  animation: bounce 3s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
+}
 
-    nav ul li:hover {
-      color: var(--gold);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 60px auto 100px;
-      padding: 0 40px;
-      text-align: center;
-    }
-
-    .hero-title {
-      font-family: 'Roboto Slab', serif;
-      font-weight: 300;
-      font-size: 3.8rem;
-      color: var(--green-dark);
-      letter-spacing: 5px;
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeIn 1.5s forwards 0.3s;
-      line-height: 1.1;
-    }
-
-    .hero-desc {
-      font-size: 1.2rem;
-      font-weight: 300;
-      color: #444;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      opacity: 0;
-      animation: fadeIn 1.5s forwards 0.8s;
-      line-height: 1.6;
-    }
-
-    @keyframes fadeIn {
-      to {opacity:1;}
-    }
-
-    .btn-container {
-      opacity: 0;
-      animation: fadeIn 1.5s forwards 1.2s;
-    }
-
-    button {
-      background-color: var(--green);
-      color: var(--white);
-      font-weight: 600;
-      padding: 14px 36px;
-      border: none;
-      border-radius: 100px;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
-      margin: 0 10px;
-      box-shadow: 0 10px 24px rgba(46, 204, 113, 0.28);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-
-    button:hover {
-      background-color: var(--green-dark);
-      box-shadow: 0 14px 36px rgba(39, 174, 96, 0.45);
-      transform: translateY(-3px);
-    }
-
-    /* Animated bicycle SVG with subtle bounce */
-
-    .bike-svg {
-      margin: 40px auto 60px;
-      width: 180px;
-      animation: bounce 3s ease-in-out infinite;
-      opacity: 0.75;
-      display: block;
-      user-select: none;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0);}
-      50% { transform: translateY(-20px);}
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: var(--green);
-      color: var(--white);
-      font-weight: 300;
-      letter-spacing: 1px;
-      font-size: 14px;
-      user-select: none;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        padding: 15px 25px;
-      }
-      main {
-        padding: 0 20px;
-        margin-top: 40px;
-      }
-
-      nav ul {
-        gap: 20px;
-      }
-
-      .hero-title {
-        font-size: 2.7rem;
-      }
-
-      .bike-svg {
-        width: 130px;
-      }
-    }  
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo" aria-label="Eris logo">E R I S</div>
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>About Us</li>
-        <li>Travel</li>
-        <li>Contact</li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <h1 class="hero-title">Sustainable Travel Starts Here</h1>
-    <p class="hero-desc">Discover bike routes designed to reduce your carbon footprint while exploring the world sustainably and stylishly.</p>
-
-    <!-- Cycling bike SVG -->
-    <svg class="bike-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none" aria-hidden="true" >
-      <circle cx="50" cy="100" r="30" stroke="#2ecc71" stroke-width="7"/>
-      <circle cx="150" cy="100" r="30" stroke="#f2b134" stroke-width="7"/>
-      <line x1="80" y1="100" x2="120" y2="50" stroke="#27ae60" stroke-width="7" />
-      <line x1="120" y1="50" x2="150" y2="100" stroke="#27ae60" stroke-width="7" />
-      <circle cx="120" cy="50" r="9" fill="#27ae60">
-        <animate attributeName="r" values="9;13;9" dur="3s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="50" cy="100" r="30" fill="none">
-        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 50 100" to="360 50 100" dur="4s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="150" cy="100" r="30" fill="none">
-        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 150 100" to="360 150 100" dur="3.5s" repeatCount="indefinite"/>
-      </circle>
-    </svg>
-
-    <div class="btn-container">
-      <button>Explore Routes</button>
-      <button style="background: transparent; border: 2px solid var(--gold); color: var(--gold);">
-        Learn More
-      </button>
-    </div>
-  </main>
-
-  <footer>
-    &copy; 2025 Eris. All rights reserved.
-  </footer>
-</body>
-</html>
+.features {
+  display: grid;
+  gap: 40px;
+  margin-top: 60px;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fit, min
