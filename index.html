@@ -141,7 +141,6 @@
     }
 
     /* Animated bicycle SVG with subtle bounce */
-
     .bike-svg {
       margin: 40px auto 60px;
       width: 180px;
@@ -156,8 +155,62 @@
       50% { transform: translateY(-20px);}
     }
 
+    /* Features Section */
+    .features {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+
+    .feature-box {
+      border-radius: 12px;
+      background: var(--grey-light);
+      padding: 28px 32px;
+      box-shadow: 0 8px 20px rgba(46,204,113,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 14px 32px rgba(39,174,96,0.25);
+    }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      letter-spacing: 1.1px;
+    }
+
+    .feature-desc {
+      font-weight: 300;
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* Callout Section */
+    .callout {
+      background: var(--gold);
+      color: var(--white);
+      margin-top: 80px;
+      padding: 40px 60px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      box-shadow: 0 10px 30px rgba(242, 177, 52, 0.7);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     /* Footer */
     footer {
+      margin-top: 100px;
       text-align: center;
       padding: 30px 20px;
       background: var(--green);
@@ -189,7 +242,16 @@
       .bike-svg {
         width: 130px;
       }
-    }  
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .callout {
+        padding: 30px 25px;
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -198,7 +260,7 @@
     <nav>
       <ul>
         <li>Home</li>
-        <li>About Us</li>
+        <li>About Me</li>
         <li>Travel</li>
         <li>Contact</li>
       </ul>
@@ -232,6 +294,25 @@
         Learn More
       </button>
     </div>
+
+    <section class="features" aria-label="Features">
+      <div class="feature-box">
+        <h3 class="feature-title">Eco-Friendly Routes</h3>
+        <p class="feature-desc">Use smart routing to travel greener and safer via bike-friendly paths.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">Personalized Planning</h3>
+        <p class="feature-desc">Tailor your rides with custom routes based on your preferences and needs.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">Community Connection</h3>
+        <p class="feature-desc">Share experiences, tips, and stories with fellow eco-conscious cyclists.</p>
+      </div>
+    </section>
+
+    <section class="callout" aria-label="Call to action">
+      Ready to change the way you travel? Start your sustainable journey with Eris today!
+    </section>
   </main>
 
   <footer>
