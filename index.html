@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eris - Sustainable Travel</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+    :root {
+      --green: #2ecc71;
+      --dark-green: #27ae60;
+      --gold: #f1c40f;
+      --white: #ffffff;
+      --light-grey: #f9f9f9;
+      --dark-grey: #333;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: var(--white);
+      color: var(--dark-grey);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideDown 0.6s ease forwards;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .logo {
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: var(--green);
+      cursor: pointer;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .logo:hover {
+      color: var(--dark-green);
+    }
+    ul.menu {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    ul.menu li {
+      cursor: pointer;
+      font-weight: 500;
+      text-transform: uppercase;
+      position: relative;
+      color: var(--dark-grey);
+      transition: color 0.3s ease;
+    }
+    ul.menu li:hover {
+      color: var(--green);
+    }
+    ul.menu li::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background: var(--gold);
+      transition: 0.3s ease;
+    }
+    ul.menu li:hover::after {
+      width: 100%;
+    }
+    main {
+      max-width: 1100px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+      letter-spacing: 3px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--dark-grey);
+      max-width: 600px;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+    }
+    button {
+      padding: 0.8rem 2.2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .btn-green {
+      background: var(--green);
+      color: var(--white);
+    }
+    .btn-green:hover {
+      background: var(--dark-green);
+      box-shadow: 0 6px 15px rgba(39, 174, 96, 0.7);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+    }
+    .btn-outline:hover {
+      background: var(--green);
+      color: var(--white);
+    }
+    section.features {
+      margin-top: 6rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      text-align: center;
+    }
+    section.features div {
+      padding: 2rem;
+      background: var(--light-grey);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(46, 204, 113, 0.15);
+      transition: transform 0.3s ease;
+    }
+    section.features div:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);
+    }
+    section.features h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--green);
+    }
+    section.features p {
+      font-size: 1rem;
+      color: var(--dark-grey);
+      line-height: 1.4;
+    }
+    footer {
+      margin-top: 8rem;
+      padding: 2rem 3rem;
+      background: var(--green);
+      color: var(--white);
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.9rem;
+      letter-spacing: 0.8px;
+    }
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      section.features {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">ERIS</div>
+      <ul class="menu">
+        <li data-link="home">Home</li>
+        <li data-link="about">About Us</li>
+        <li data-link="travel">Travel</li>
+        <li data-link="contact">Contact Us</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <h1>Discover Sustainable Journeys</h1>
+      <p>Explore eco-friendly travel routes that help you reduce your carbon footprint and enjoy the ride more.</p>
+      <div class="btn-group">
+        <button class="btn-green" id="findRouteBtn">Find a Route</button>
+        <button class="btn-outline" id="learnMoreBtn">Learn More</button>
+      </div>
+    </section>
+
+    <section class="features" id="about">
+      <div>
+        <h3>Eco-Friendly Routing</h3>
+        <p>Intelligent bike paths designed to minimize environmental impact and maximize enjoyment.</p>
+      </div>
+      <div>
+        <h3>Route Planner</h3>
+        <p>Create, save, and share your personalized routes with the Eris community.</p>
+      </div>
+      <div>
+        <h3>Community Stories</h3>
+        <p>Get inspired by fellow eco-cyclists and share your own sustainability journey.</p>
+      </div>
+    </section>
+
+    <section id="travel" style="margin-top: 70px; text-align: center;">
+      <h2>Your Travel Path Awaits</h2>
+      <p>Interactive travel routes will be added here soon with beautiful maps and real-time directions.</p>
+    </section>
+
+    <section id="contact" style="margin-top: 70px; text-align: center;">
+      <h2>Contact Us</h2>
+      <p>Questions? Feedback? Reach out and connect with the Eris team!</p>
+      <form style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
+        <input type="text" placeholder="Name" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;" />
+        <input type="email" placeholder="Email" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;" />
+        <textarea placeholder="Message" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;" rows="4"></textarea>
+        <button type="submit" class="btn-green" style="margin-top: 10px;">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Eris. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for menu links
+    const menuItems = document.querySelectorAll('ul.menu li');
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const section = document.getElementById(item.dataset.link);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Button actions
+    document.getElementById('findRouteBtn').onclick = () => {
+      document.getElementById('travel').scrollIntoView({ behavior: 'smooth' });
+    };
+    document.getElementById('learnMoreBtn').onclick = () => {
+      document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    };
+  </script>
+</body>
+</html>
