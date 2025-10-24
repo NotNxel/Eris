@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eris - Travel Planner</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family:Poppins:wght@300;600&display=swap');
   body {
     font-family: 'Poppins', sans-serif;
     max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 30px auto;
+    padding: 0 10px 50px;
     background: #fff;
     color: #333;
   }
@@ -24,8 +23,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
+    gap: 10px;
+    margin-bottom: 20px;
   }
   input, select, button {
     padding: 12px 15px;
@@ -41,6 +40,7 @@
     font-weight: 600;
     cursor: pointer;
     max-width: 150px;
+    transition: background-color 0.3s ease;
   }
   button:hover {
     background-color: #219150;
@@ -51,26 +51,52 @@
     border-radius: 12px;
     box-shadow: 0 4px 18px rgba(0,0,0,0.1);
   }
-  #results {
+  #directions-panel {
     margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    height: 180px;
+    overflow-y: auto;
+    font-size: 14px;
+    color: #555;
+  }
+  a.home-link {
+    display: block;
+    margin: 30px auto;
+    width: max-content;
+    color: #f2b134;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+  }
+  a.home-link:hover {
+    color: #27ae60;
   }
 </style>
 </head>
 <body>
-<h1>Plan Your Travel Route</h1>
+
+<h1>Plan Your Sustainable Travel Route</h1>
+
 <form id="route-form">
-  <input type="text" id="start" placeholder="Starting location" required />
+  <input type="text" id="start" placeholder="Start Location" required />
   <input type="text" id="end" placeholder="Destination" required />
   <select id="mode" required>
     <option value="BICYCLING">Bike</option>
-    <option value="TRANSIT">Public Transit</option>
+    <option value="TRANSIT">Public Transport</option>
     <option value="WALKING">Walking</option>
   </select>
   <button type="submit">Find Route</button>
 </form>
 
 <div id="map"></div>
-<div id="results"></div>
+
+<div id="directions-panel"></div>
+
+<a href="index.html" class="home-link" aria-label="Back to Home page">← Back to Home</a>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
 <script>
@@ -78,14 +104,27 @@
 
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 13,
-      center: { lat: 40.73061, lng: -73.935242 } // Default center (New York)
+      zoom: 14,
+      center: { lat: 40.7128, lng: -74.0060 }, // Default center: New York City
     });
     directionsService = new google.maps.DirectionsService();
-    directionsRenderer = new google.maps.DirectionsRenderer({map: map});
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+    directionsRenderer.setPanel(document.getElementById('directions-panel'));
   }
 
-  function displayRoute(start, end, mode) {
+  function calculateAndDisplayRoute(event) {
+    event.preventDefault();
+
+    const start = document.getElementById("start").value.trim();
+    const end = document.getElementById("end").value.trim();
+    const mode = document.getElementById("mode").value;
+
+    if (!start || !end) {
+      alert("Please enter both start and destination addresses.");
+      return;
+    }
+
     directionsService.route(
       {
         origin: start,
@@ -95,37 +134,17 @@
       (response, status) => {
         if (status === "OK") {
           directionsRenderer.setDirections(response);
-          showRouteInfo(response);
         } else {
-          document.getElementById("results").innerHTML = "<p>Route not found: " + status + "</p>";
+          alert("Could not display directions due to: " + status);
         }
       }
     );
   }
 
-  function showRouteInfo(response) {
-    const route = response.routes[0].legs[0];
-    let infoHtml = `<h3>Route Info</h3>
-                    <p><strong>Distance:</strong> ${route.distance.text}</p>
-                    <p><strong>Duration:</strong> ${route.duration.text}</p>`;
-    // Simulated nearby bikes availability info for demo
-    if(document.getElementById('mode').value === 'BICYCLING') {
-      infoHtml += '<p><strong>Bikes available near your start location:</strong> 5</p>';
-    }
-    document.getElementById('results').innerHTML = infoHtml;
-  }
-
-  document.getElementById("route-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const start = document.getElementById("start").value.trim();
-    const end = document.getElementById("end").value.trim();
-    const mode = document.getElementById("mode").value;
-    if (start && end) {
-      displayRoute(start, end, mode);
-    }
-  });
+  document.getElementById("route-form").addEventListener("submit", calculateAndDisplayRoute);
 
   window.onload = initMap;
 </script>
+
 </body>
 </html>
