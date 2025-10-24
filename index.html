@@ -6,37 +6,47 @@
   <title>Eris - Sustainable Travel</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
     :root {
       --green: #2ecc71;
       --dark-green: #27ae60;
-      --gold: #f1c40f;
+      --gold: #f29d35;
       --white: #ffffff;
-      --light-grey: #f9f9f9;
+      --light-blue: #d0f0fd;
+      --soft-grey: #f4f7fa;
       --dark-grey: #333;
+      --accent-blue: #5dade2;
+      --shadow-light: rgba(46, 204, 113, 0.15);
+      --shadow-dark: rgba(39, 174, 96, 0.3);
     }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
+
     body {
       background: var(--white);
       color: var(--dark-grey);
       line-height: 1.6;
     }
+
     header {
       background: var(--white);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       position: sticky;
       top: 0;
       z-index: 100;
-      animation: slideDown 0.6s ease forwards;
+      animation: slideDown 0.8s ease forwards;
     }
+
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px);}
-      to {opacity:1; transform: translateY(0);}
+      from {opacity: 0; transform: translateY(-25px);}
+      to {opacity: 1; transform: translateY(0);}
     }
+
     nav {
       display: flex;
       justify-content: space-between;
@@ -45,159 +55,325 @@
       max-width: 1200px;
       margin: auto;
     }
+
     .logo {
-      font-weight: 600;
-      font-size: 1.8rem;
-      color: var(--green);
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--dark-green);
       cursor: pointer;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       user-select: none;
       transition: color 0.3s ease;
     }
+
     .logo:hover {
-      color: var(--dark-green);
+      color: var(--gold);
     }
+
     ul.menu {
       list-style: none;
       display: flex;
-      gap: 2rem;
+      gap: 2.4rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
     }
+
     ul.menu li {
       cursor: pointer;
-      font-weight: 500;
-      text-transform: uppercase;
-      position: relative;
       color: var(--dark-grey);
+      position: relative;
       transition: color 0.3s ease;
     }
+
     ul.menu li:hover {
-      color: var(--green);
+      color: var(--gold);
     }
+
     ul.menu li::after {
       content: '';
       position: absolute;
       width: 0%;
-      height: 2px;
-      bottom: -6px;
+      height: 3px;
+      bottom: -8px;
       left: 0;
       background: var(--gold);
+      border-radius: 2px;
       transition: 0.3s ease;
     }
+
     ul.menu li:hover::after {
       width: 100%;
     }
+
     main {
       max-width: 1100px;
       margin: 4rem auto;
       padding: 0 2rem;
     }
+
     .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       animation: fadeIn 1s ease forwards;
+      position: relative;
     }
+
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
     }
+
     .hero h1 {
-      font-size: 3rem;
-      color: var(--green);
+      font-size: 3.2rem;
+      color: var(--dark-green);
       margin-bottom: 1rem;
       letter-spacing: 3px;
+      font-weight: 700;
     }
+
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--dark-grey);
-      max-width: 600px;
-      margin-bottom: 2rem;
+      max-width: 650px;
+      margin-bottom: 2.5rem;
       line-height: 1.5;
+      font-weight: 400;
     }
+
     .btn-group {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.8rem;
+      z-index: 2;
+      position: relative;
     }
+
     button {
-      padding: 0.8rem 2.2rem;
+      padding: 0.75rem 2.6rem;
       font-size: 1rem;
       font-weight: 600;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+      transition: all 0.35s ease;
+      box-shadow: 0 5px 20px rgba(242, 157, 53, 0.4);
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.3px;
+      user-select: none;
     }
+
     .btn-green {
       background: var(--green);
       color: var(--white);
+      box-shadow: 0 6px 18px var(--shadow-light);
     }
+
     .btn-green:hover {
       background: var(--dark-green);
-      box-shadow: 0 6px 15px rgba(39, 174, 96, 0.7);
+      box-shadow: 0 8px 28px var(--shadow-dark);
+      transform: scale(1.05);
     }
+
     .btn-outline {
       background: transparent;
       color: var(--green);
-      border: 2px solid var(--green);
+      border: 2.5px solid var(--gold);
+      font-weight: 700;
     }
+
     .btn-outline:hover {
-      background: var(--green);
+      background: var(--gold);
       color: var(--white);
+      transform: scale(1.05);
     }
+
+    /* Animated Bicycle SVG Container */
+    .bike-animation {
+      position: absolute;
+      right: 10%;
+      bottom: -100px;
+      width: 220px;
+      animation: bounce 3s ease-in-out infinite;
+      opacity: 0.75;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-25px);}
+    }
+
     section.features {
-      margin-top: 6rem;
+      margin-top: 7rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 3rem;
       text-align: center;
+      padding-bottom: 3rem;
     }
+
     section.features div {
-      padding: 2rem;
-      background: var(--light-grey);
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(46, 204, 113, 0.15);
-      transition: transform 0.3s ease;
+      padding: 2.5rem;
+      background: var(--soft-grey);
+      border-radius: 18px;
+      box-shadow: 0 6px 22px var(--shadow-light);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
+
     section.features div:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);
+      transform: translateY(-14px);
+      box-shadow: 0 12px 36px var(--shadow-dark);
     }
+
     section.features h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      margin-bottom: 1.1rem;
       color: var(--green);
+      font-weight: 700;
     }
+
     section.features p {
       font-size: 1rem;
       color: var(--dark-grey);
-      line-height: 1.4;
+      line-height: 1.5;
+      font-weight: 400;
     }
-    footer {
-      margin-top: 8rem;
-      padding: 2rem 3rem;
-      background: var(--green);
-      color: var(--white);
+
+    /* About Me Section */
+    #aboutMe {
+      background: var(--light-blue);
+      border-radius: 18px;
+      padding: 3rem 2rem;
+      margin: 5rem auto 8rem;
+      max-width: 700px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+    }
+
+    #aboutMe h2 {
+      font-size: 2.5rem;
+      color: var(--dark-green);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    #aboutMe p {
+      font-size: 1.1rem;
+      color: var(--dark-grey);
+      line-height: 1.6;
+      font-weight: 400;
+      max-width: 550px;
+      margin: auto;
+    }
+
+    /* Contact Section */
+    section#contact {
+      margin-top: 4rem;
       text-align: center;
     }
-    footer p {
-      font-size: 0.9rem;
-      letter-spacing: 0.8px;
+
+    section#contact h2 {
+      font-weight: 700;
+      color: var(--green);
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1.4px;
     }
+
+    section#contact p {
+      max-width: 600px;
+      margin: auto;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--dark-grey);
+      margin-bottom: 2rem;
+    }
+
+    section#contact form {
+      max-width: 420px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input, textarea {
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1.5px solid var(--gold);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      margin-top: 10px;
+      background: var(--gold);
+      color: var(--white);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 0;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      box-shadow: 0 6px 16px rgba(242, 157, 53, 0.5);
+    }
+
+    button[type="submit"]:hover {
+      background: #d18f0c;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 6rem;
+      padding: 3rem 2rem;
+      background: var(--dark-green);
+      color: var(--white);
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
       nav {
         padding: 1rem 1.5rem;
       }
+
       .hero h1 {
         font-size: 2.2rem;
       }
+
       section.features {
         grid-template-columns: 1fr;
         gap: 2rem;
+      }
+
+      .bike-animation {
+        width: 140px;
+        right: 5%;
+        bottom: -65px;
       }
     }
   </style>
@@ -205,12 +381,12 @@
 <body>
   <header>
     <nav>
-      <div class="logo">ERIS</div>
-      <ul class="menu">
-        <li data-link="home">Home</li>
-        <li data-link="about">About Us</li>
-        <li data-link="travel">Travel</li>
-        <li data-link="contact">Contact Us</li>
+      <div class="logo" aria-label="Eris logo">ERIS</div>
+      <ul class="menu" role="menu">
+        <li role="menuitem" data-link="home">Home</li>
+        <li role="menuitem" data-link="aboutMe">About Me</li>
+        <li role="menuitem" data-link="travel">Travel</li>
+        <li role="menuitem" data-link="contact">Contact Us</li>
       </ul>
     </nav>
   </header>
@@ -218,41 +394,64 @@
   <main>
     <section class="hero" id="home">
       <h1>Discover Sustainable Journeys</h1>
-      <p>Explore eco-friendly travel routes that help you reduce your carbon footprint and enjoy the ride more.</p>
+      <p>Explore eco-friendly travel routes that reduce your carbon footprint and make cycling joyous.</p>
       <div class="btn-group">
-        <button class="btn-green" id="findRouteBtn">Find a Route</button>
-        <button class="btn-outline" id="learnMoreBtn">Learn More</button>
+        <button class="btn-green" id="findRouteBtn" aria-label="Find a route">Find a Route</button>
+        <button class="btn-outline" id="learnMoreBtn" aria-label="Learn more about Eris">Learn More</button>
+      </div>
+      <div class="bike-animation" aria-hidden="true">
+        <!-- SVG of a simple animated bicycle -->
+        <svg width="220" height="140" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" >
+          <circle cx="50" cy="100" r="30" stroke="#27ae60" stroke-width="8"/>
+          <circle cx="150" cy="100" r="30" stroke="#f29d35" stroke-width="8"/>
+          <line x1="80" y1="100" x2="120" y2="50" stroke="#2ecc71" stroke-width="7" />
+          <line x1="120" y1="50" x2="150" y2="100" stroke="#2ecc71" stroke-width="7" />
+          <circle cx="120" cy="50" r="8" fill="#27ae60">
+            <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="50" cy="100" r="30" fill="none">
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 50 100" to="360 50 100" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="150" cy="100" r="30" fill="none">
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 150 100" to="360 150 100" dur="3.5s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
       </div>
     </section>
 
-    <section class="features" id="about">
+    <section class="features" id="aboutMe" tabindex="0">
       <div>
         <h3>Eco-Friendly Routing</h3>
-        <p>Intelligent bike paths designed to minimize environmental impact and maximize enjoyment.</p>
+        <p>Intelligent bike paths designed to minimize environmental impact while maximizing enjoyment and safety.</p>
       </div>
       <div>
         <h3>Route Planner</h3>
-        <p>Create, save, and share your personalized routes with the Eris community.</p>
+        <p>Create, save, and share personalized cycling routes with the growing Eris community worldwide.</p>
       </div>
       <div>
         <h3>Community Stories</h3>
-        <p>Get inspired by fellow eco-cyclists and share your own sustainability journey.</p>
+        <p>Get inspired by fellow eco-cyclists and share your own sustainable journey with others.</p>
       </div>
     </section>
 
-    <section id="travel" style="margin-top: 70px; text-align: center;">
+    <section id="travel" style="margin-top: 70px; text-align: center;" tabindex="0">
       <h2>Your Travel Path Awaits</h2>
-      <p>Interactive travel routes will be added here soon with beautiful maps and real-time directions.</p>
+      <p>Interactive travel routes with beautiful maps, real-time tracking, and smart suggestions will be coming soon.</p>
     </section>
 
-    <section id="contact" style="margin-top: 70px; text-align: center;">
+    <section id="aboutMe" style="margin: 60px auto 80px max-width:700px; padding: 0 1rem;" aria-label="About the creator" tabindex="0">
+      <h2>About Me</h2>
+      <p>Hi, I’m the creator behind Eris — passionate about sustainable tech and modern travel solutions. I believe in building tools that help people connect with nature and move smarter, cleaner, and happier. Join me on this journey!</p>
+    </section>
+
+    <section id="contact" tabindex="0" style="margin-top:100px; text-align:center;">
       <h2>Contact Us</h2>
-      <p>Questions? Feedback? Reach out and connect with the Eris team!</p>
-      <form style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
-        <input type="text" placeholder="Name" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;" />
-        <input type="email" placeholder="Email" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;" />
-        <textarea placeholder="Message" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc;" rows="4"></textarea>
-        <button type="submit" class="btn-green" style="margin-top: 10px;">Send</button>
+      <p>Have questions or feedback? Reach out to the Eris team — we’re here to listen and help!</p>
+      <form style="max-width: 420px; margin: 0 auto; display:flex; flex-direction:column; gap:10px;">
+        <input type="text" placeholder="Name" required aria-label="Your name" />
+        <input type="email" placeholder="Email" required aria-label="Your email" />
+        <textarea placeholder="Message" required aria-label="Your message" rows="4"></textarea>
+        <button type="submit" class="btn-green" aria-label="Send message">Send</button>
       </form>
     </section>
   </main>
@@ -262,23 +461,24 @@
   </footer>
 
   <script>
-    // Smooth scrolling for menu links
-    const menuItems = document.querySelectorAll('ul.menu li');
+    // Smooth scroll for navigation menu
+    const menuItems = document.querySelectorAll("ul.menu li");
     menuItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const section = document.getElementById(item.dataset.link);
+      item.addEventListener("click", () => {
+        const targetId = item.dataset.link;
+        const section = document.getElementById(targetId);
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+          section.scrollIntoView({behavior: "smooth", block: "start"});
         }
       });
     });
 
-    // Button actions
-    document.getElementById('findRouteBtn').onclick = () => {
-      document.getElementById('travel').scrollIntoView({ behavior: 'smooth' });
+    // Buttons smooth scroll
+    document.getElementById("findRouteBtn").onclick = () => {
+      document.getElementById("travel").scrollIntoView({behavior: "smooth", block: "start"});
     };
-    document.getElementById('learnMoreBtn').onclick = () => {
-      document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("learnMoreBtn").onclick = () => {
+      document.getElementById("aboutMe").scrollIntoView({behavior: "smooth", block: "start"});
     };
   </script>
 </body>
