@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eris - Travel Planner</title>
-<link href="https://api.maptiler.com/maps/streets-v2/style.css?key=HyMgH5XL6XMwIyM366WN" rel="stylesheet" />
+<title>Eris - Travel Planner with MapTiler</title>
+<link href="https://api.maptiler.com/maps/streets-v2/style.css?key=YOUR_MAPTILER_API_KEY" rel="stylesheet" />
 <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
 <style>
   body {
@@ -15,9 +15,9 @@
     color: #333;
   }
   h1 {
-    color: #27ae60;
-    font-weight: 600;
     text-align: center;
+    font-weight: 600;
+    color: #27ae60;
     margin-bottom: 20px;
   }
   form {
@@ -85,7 +85,7 @@
 <form id="routeForm">
   <input type="text" id="start" placeholder="Start location (e.g. address or city)" autocomplete="off" required />
   <input type="text" id="end" placeholder="Destination" autocomplete="off" required />
-  <button type="submit">Get Bike/Transit/Walk Route</button>
+  <button type="submit">Get Bike Route</button>
 </form>
 
 <div id="map"></div>
@@ -94,106 +94,35 @@
 <a href="index.html" class="home-link" aria-label="Back to Home page">← Back to Home</a>
 
 <script>
+  // Initialize map
   const map = new maplibregl.Map({
     container: 'map',
     style: `https://api.maptiler.com/maps/streets-v2/style.json?key=YOUR_MAPTILER_API_KEY`,
-    center: [0, 0], // Will re-center later
+    center: [0, 0],
     zoom: 2
   });
-
-  // Add navigation controls (zoom buttons)
   map.addControl(new maplibregl.NavigationControl());
 
-  // Simple function to get coordinates from MapTiler Geocoding API
   async function geocode(location) {
-    const key = 'YOUR_MAPTILER_API_KEY';
+    const key = 'HyMgH5XL6XMwIyM366WN';
     const url = `https://api.maptiler.com/geocoding/${encodeURIComponent(location)}.json?key=${key}&limit=1`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error('Geocoding request failed');
+    if (!res.ok) throw new Error('Geocoding request failed with status ' + res.status);
     const data = await res.json();
-    if (data.features && data.features.length > 0) {
-      return data.features[0].geometry.coordinates;
-    }
-    throw new Error('Location not found: ' + location);
+    if (!data.features || data.features.length === 0) throw new Error('Location not found: ' + location);
+    return data.features[0].geometry.coordinates;
   }
 
-  // Function to request route from MapTiler Routing API for cycling, transit, or walking
   async function getRoute(startCoords, endCoords) {
     const key = 'YOUR_MAPTILER_API_KEY';
-    // For demo: use cycling profile. MapTiler supports biking, walking, driving mainly.
-    let url = `https://api.maptiler.com/routing/v1/cycling/${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}?key=${key}&overview=full&geometries=geojson&steps=true`;
-
+    const url = `https://api.maptiler.com/routing/v1/cycling/${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}?key=${key}&overview=full&geometries=geojson&steps=true`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error('Routing request failed');
+    if (!res.ok) throw new Error('Routing request failed with status ' + res.status);
     const data = await res.json();
-    if (!data.routes || data.routes.length === 0) throw new Error('No routes found');
-
+    if (!data.routes || data.routes.length === 0) throw new Error('No route found');
     return data.routes[0];
   }
 
-  // Function to draw route on map
   function drawRoute(route) {
-    // Remove existing layer if present
     if (map.getSource('route')) {
-      map.removeLayer('route');
-      map.removeSource('route');
-    }
-    map.addSource('route', {
-      'type': 'geojson',
-      'data': {
-        'type': 'Feature',
-        'geometry': route.geometry
-      }
-    });
-    map.addLayer({
-      'id': 'route',
-      'type': 'line',
-      'source': 'route',
-      'layout': { 'line-join': 'round', 'line-cap': 'round' },
-      'paint': { 'line-color': '#27ae60', 'line-width': 6 }
-    });
-    // Fit map to route bounds
-    const coordinates = route.geometry.coordinates;
-    const bounds = coordinates.reduce(function(bounds, coord) {
-      return bounds.extend(coord);
-    }, new maplibregl.LngLatBounds(coordinates[0], coordinates[0]));
-    map.fitBounds(bounds, { padding: 50 });
-  }
-
-  // Function to display steps in directions div
-  function displayDirections(steps) {
-    const directionsDiv = document.getElementById('directions');
-    let html = '';
-    steps.forEach((step, idx) => {
-      html += `${idx + 1}. ${step.maneuver.instruction}\n`;
-    });
-    directionsDiv.textContent = html;
-  }
-
-  document.getElementById('routeForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const start = document.getElementById('start').value.trim();
-    const end = document.getElementById('end').value.trim();
-
-    if (!start || !end) {
-      alert('Please fill in both locations');
-      return;
-    }
-    try {
-      const startCoords = await geocode(start);
-      const endCoords = await geocode(end);
-
-      // Just demo cycling route; can adjust or add a transport mode selection for transit or walking
-      const route = await getRoute(startCoords, endCoords);
-
-      drawRoute(route);
-      displayDirections(route.legs[0].steps);
-
-    } catch (err) {
-      alert(err.message);
-    }
-  });
-</script>
-
-</body>
-</html>
+      map.remove
